@@ -14,17 +14,17 @@ const board = computed(() => {
   return [row0.value, row1.value, row2.value, row3.value, row4.value, row5.value, row6.value]
 })
 
-const _board = computed(() => board)
+const _board = ref([...board.value])
 
 const playing = computed(() => {
   return board.value.some((row) => row.some((piece) => piece === 1))
 })
 let drag = ref(false)
-const onMove = ref((event: Event, row: number) => {
+const onMove = ref((event: Event & { oldIndex: number }, row: number) => {
   drag.value = true
-
-  console.log(event, row)
-  return false
+  const oldIndex = event.oldIndex
+  const value = board.value[row][oldIndex]
+  if (value === -1) console.log(_board.value)
 })
 </script>
 
