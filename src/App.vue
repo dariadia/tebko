@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { ref, onBeforeMount, computed } from 'vue'
-import nestedDraggable from 'vuedraggable'
+import draggable from 'vuedraggable'
 
-const CORNERS = [0, 1, 5, 6]
-let board = ref([[1]])
+const row1 = ref([-1, -1, 1, 1, 1, -1, -1])
+const row2 = ref([-1, -1, 1, 1, 1, -1, -1])
+const row3 = ref([1, 1, 1, 1, 1, 1, 1])
+const row4 = ref([1, 1, 1, 0, 1, 1, 1])
+const row5 = ref([1, 1, 1, 1, 1, 1, 1])
+const row6 = ref([-1, -1, 1, 1, 1, -1, -1])
+const row7 = ref([-1, -1, 1, 1, 1, -1, -1])
 
-onBeforeMount(() => {
-  board.value = Array.from({ length: 7 }, (_, row) =>
-    Array.from({ length: 7 }, (_, col) => {
-      if (row === 3 && col === 3) return 0
-      if (CORNERS.includes(row) && CORNERS.includes(col)) return -1
-      else return 1
-    })
-  )
+const board = computed(() => {
+  return [row1.value, row2.value, row3.value, row4.value, row5.value, row6.value, row7.value]
 })
+
 const playing = computed(() => {
   return board.value.some((row) => row.some((piece) => piece === 1))
 })
@@ -30,19 +30,61 @@ const drag = ref(false)
     <h4 v-if="!playing">Вы выиграли</h4>
   </header>
   <main style="padding-top: 42px; max-width: fit-content; margin: auto; display: block">
-    <nested-draggable v-model="board" @start="drag = true" @end="drag = false" item-key="col">
+    <draggable v-model="row1" group="rows" @start="drag = true" @end="drag = false" item-key="col">
       <template #item="{ element, row }">
-        <div :key="row">
-          <div
-            v-for="(item, col) in element"
-            :key="col"
-            style="padding: 20px 26px; border: 1px solid grey; display: inline-block"
-          >
-            <span v-if="item !== -1">{{ item }}</span>
-            <span v-else style="opacity: 0">1</span>
-          </div>
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
         </div>
       </template>
-    </nested-draggable>
+    </draggable>
+    <draggable v-model="row2" group="rows" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
+        </div>
+      </template>
+    </draggable>
+    <draggable v-model="row3" group="rows" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
+        </div>
+      </template>
+    </draggable>
+    <draggable v-model="row4" group="rows" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
+        </div>
+      </template>
+    </draggable>
+    <draggable v-model="row5" group="rows" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
+        </div>
+      </template>
+    </draggable>
+    <draggable v-model="row6" group="rows" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
+        </div>
+      </template>
+    </draggable>
+    <draggable v-model="row7" group="rows" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <div :key="row" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+          <span v-if="element !== -1">{{ element }}</span>
+          <span v-else style="opacity: 0">1</span>
+        </div>
+      </template>
+    </draggable>
   </main>
 </template>
