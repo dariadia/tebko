@@ -29,13 +29,18 @@ const drag = ref(false)
     >
     <h4 v-if="!playing">Вы выиграли</h4>
   </header>
-  <main style="padding-top: 100px; max-width: 900px; margin: auto; display: block">
-    <nested-draggable v-model="board" @start="drag = true" @end="drag = false" item-key="id">
-      <template #item="{ element }">
-        <v-row style="display: block">
-          <v-col v-for="item in element" style="padding: 36px; border: 1px solid grey">{{
-            item
-          }}</v-col>
+  <main style="padding-top: 42px; max-width: fit-content; margin: auto; display: block">
+    <nested-draggable v-model="board" @start="drag = true" @end="drag = false" item-key="col">
+      <template #item="{ element, row }">
+        <v-row :key="row" style="display: block">
+          <v-col
+            v-for="(item, col) in element"
+            :key="col"
+            style="padding: 20px 26px; border: 1px solid grey; display: inline-block"
+          >
+            <span v-if="item !== -1">{{ item }}</span>
+            <span v-else style="opacity: 0">1</span>
+          </v-col>
         </v-row>
       </template>
     </nested-draggable>
