@@ -74,6 +74,14 @@ const onMove = ref(
     <h4 v-if="!playing">Вы выиграли</h4>
   </header>
   <main style="padding-top: 42px; max-width: fit-content; margin: auto; display: block">
+    <v-alert
+      v-if="hint"
+      closable
+      absolute
+      type="warning"
+      text="Вы можете двигать только оленей"
+      variant="outlined"
+    ></v-alert>
     <draggable
       v-model="row0"
       group="rows"
@@ -83,7 +91,7 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-grey border-sm">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
         </v-col>
@@ -98,10 +106,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
     <draggable
@@ -112,10 +120,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
     <draggable
@@ -126,10 +134,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
     <draggable
@@ -140,10 +148,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
     <draggable
@@ -154,10 +162,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
     <draggable
@@ -168,10 +176,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
   </main>
