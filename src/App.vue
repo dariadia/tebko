@@ -75,12 +75,20 @@ const onMove = ref(
   </header>
   <main style="padding-top: 42px; max-width: fit-content; margin: auto; display: block">
     <v-alert
-      v-if="hint"
+      v-model="hint"
       closable
-      absolute
+      position="absolute"
       type="warning"
-      text="Вы можете двигать только оленей"
+      text="⚠︎ Вы можете двигать только оленей"
+      class="pa-2"
+      style="
+        top: calc((100vh - 50px) / 2);
+        left: calc((100vw - 370px) / 2);
+        cursor: pointer;
+        background-color: var(--vt-c-black);
+      "
       variant="outlined"
+      @click="hint = false"
     ></v-alert>
     <draggable
       v-model="row0"
