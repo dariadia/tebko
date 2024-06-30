@@ -91,8 +91,8 @@ const moveEnd = ref((event: DragEvent) => {
     else if (targetRow > fromCol) midRow = targetRow - 1
     carry[midRow][midCol] = 0
     carry[fromRow][fromCol] = 0
+    carry[targetRow][targetCol] = 1
   }
-
   row0.value = carry[0]
   row1.value = carry[1]
   row2.value = carry[2]
@@ -117,16 +117,16 @@ const moveEnd = ref((event: DragEvent) => {
     <v-fade-transition>
       <v-alert
         v-model="hint"
-        closable
         position="absolute"
-        type="warning"
+        color="warning"
         text="⚠︎ Вы можете двигать только оленей"
-        class="pa-2"
+        class="py-2 px-4"
         style="
           top: calc((100vh - 50px) / 2);
-          left: calc((100vw - 370px) / 2);
+          left: calc((100vw - 300px) / 2);
           cursor: pointer;
           background-color: var(--vt-c-black);
+          z-index: 2;
         "
         variant="outlined"
         @click="hint = false"
