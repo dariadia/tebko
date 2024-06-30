@@ -20,7 +20,8 @@ const _board = ref([...board.value])
 const playing = computed(() => {
   return board.value.some((row) => row.some((piece) => piece === 1))
 })
-let drag = ref(false)
+const drag = ref(false)
+const hint = ref(false)
 const checkDirections = (row: number, col: number) => {
   possibleMoves.value = []
   const DIRECTIONS = [
@@ -52,7 +53,7 @@ const onMove = ref(
     drag.value = true
     const oldIndex = event.oldIndex
     const value = board.value[row][oldIndex]
-    if (value === -1 || value === 0) console.log('cancel move. Can only move ones')
+    if (value === -1 || value === 0) hint.value = true
     else checkDirections(row, oldIndex)
     console.log(possibleMoves.value)
     // if (value === 1) {
@@ -82,10 +83,10 @@ const onMove = ref(
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <div :key="indx" style="padding: 20px 26px; border: 1px solid grey; display: inline-block">
+        <v-col :key="indx" class="py-5 px-6 border-grey border-sm">
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </div>
+        </v-col>
       </template>
     </draggable>
     <draggable
