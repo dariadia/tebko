@@ -11,11 +11,12 @@ const row5 = ref([-1, -1, 1, 1, 1, -1, -1])
 const row6 = ref([-1, -1, 1, 1, 1, -1, -1])
 let possibleMoves: Ref<number[][]> = ref([[]])
 
-const board = computed(() => {
-  return [row0.value, row1.value, row2.value, row3.value, row4.value, row5.value, row6.value]
+const board = computed({
+  get: () => [row0.value, row1.value, row2.value, row3.value, row4.value, row5.value, row6.value],
+  set: (val) => {}
 })
 
-const _board = ref([...board.value])
+let carry: number[][] = []
 
 const playing = computed(() => {
   return board.value.some((row) => row.some((piece) => piece === 1))
@@ -55,6 +56,7 @@ const onMove = ref(
     const value = board.value[row][oldIndex]
     if (value === -1 || value === 0) {
       hint.value = true
+      carry = [...board.value]
       setTimeout(() => (hint.value = false), 3000)
     } else checkDirections(row, oldIndex)
     console.log(possibleMoves.value)
@@ -64,6 +66,19 @@ const onMove = ref(
     // }
   }
 )
+
+const moveEnd = ref(() => {
+  drag.value = false
+  if (carry.length) {
+    row0.value = carry[0]
+    row1.value = carry[1]
+    row2.value = carry[2]
+    row3.value = carry[3]
+    row4.value = carry[4]
+    row5.value = carry[5]
+    row6.value = carry[6]
+  }
+})
 </script>
 
 <template>
@@ -75,7 +90,7 @@ const onMove = ref(
     >
     <h4 v-if="!playing">Вы выиграли</h4>
   </header>
-  <main style="padding-top: 42px; max-width: fit-content; margin: auto; display: block">
+  <main class="pt-10 d-block mx-auto" style="width: fit-content">
     <v-fade-transition>
       <v-alert
         v-model="hint"
@@ -99,7 +114,7 @@ const onMove = ref(
       group="rows"
       data-row="0"
       @start="(event) => onMove(event, 0)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -114,7 +129,7 @@ const onMove = ref(
       data-row="1"
       group="rows"
       @start="(event) => onMove(event, 1)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -128,7 +143,7 @@ const onMove = ref(
       v-model="row2"
       group="rows"
       @start="(event) => onMove(event, 2)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -142,7 +157,7 @@ const onMove = ref(
       v-model="row3"
       group="rows"
       @start="(event) => onMove(event, 3)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -156,7 +171,7 @@ const onMove = ref(
       v-model="row4"
       group="rows"
       @start="(event) => onMove(event, 4)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -170,7 +185,7 @@ const onMove = ref(
       v-model="row5"
       group="rows"
       @start="(event) => onMove(event, 5)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -184,7 +199,7 @@ const onMove = ref(
       v-model="row6"
       group="rows"
       @start="(event) => onMove(event, 6)"
-      @end="drag = false"
+      @end="moveEnd"
       item-key="col"
     >
       <template #item="{ element, indx }">
