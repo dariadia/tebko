@@ -30,7 +30,13 @@ const checkDirections = (row: number, col: number) => {
     [0, 1]
   ]
   DIRECTIONS.forEach((dir) => {
-    // check for -1 rows and end board
+    const ROW_LEN = 7
+    if (
+      [row + dir[0], col + dir[1], row + dir[0] * 2, col + dir[1] * 2].every(
+        (item) => item >= ROW_LEN || item < 0
+      )
+    )
+      return false
     if (
       board.value[row + dir[0]][col + dir[1]] &&
       board.value[row + dir[0] * 2][col + dir[1] * 2] === 0
