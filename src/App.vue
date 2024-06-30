@@ -53,8 +53,10 @@ const onMove = ref(
     drag.value = true
     const oldIndex = event.oldIndex
     const value = board.value[row][oldIndex]
-    if (value === -1 || value === 0) hint.value = true
-    else checkDirections(row, oldIndex)
+    if (value === -1 || value === 0) {
+      hint.value = true
+      setTimeout(() => (hint.value = false), 3000)
+    } else checkDirections(row, oldIndex)
     console.log(possibleMoves.value)
     // if (value === 1) {
     //   const targetRow = Number(event.to?.dataset?.row)
@@ -74,22 +76,24 @@ const onMove = ref(
     <h4 v-if="!playing">Вы выиграли</h4>
   </header>
   <main style="padding-top: 42px; max-width: fit-content; margin: auto; display: block">
-    <v-alert
-      v-model="hint"
-      closable
-      position="absolute"
-      type="warning"
-      text="⚠︎ Вы можете двигать только оленей"
-      class="pa-2"
-      style="
-        top: calc((100vh - 50px) / 2);
-        left: calc((100vw - 370px) / 2);
-        cursor: pointer;
-        background-color: var(--vt-c-black);
-      "
-      variant="outlined"
-      @click="hint = false"
-    ></v-alert>
+    <v-fade-transition>
+      <v-alert
+        v-model="hint"
+        closable
+        position="absolute"
+        type="warning"
+        text="⚠︎ Вы можете двигать только оленей"
+        class="pa-2"
+        style="
+          top: calc((100vh - 50px) / 2);
+          left: calc((100vw - 370px) / 2);
+          cursor: pointer;
+          background-color: var(--vt-c-black);
+        "
+        variant="outlined"
+        @click="hint = false"
+      ></v-alert>
+    </v-fade-transition>
     <draggable
       v-model="row0"
       group="rows"
