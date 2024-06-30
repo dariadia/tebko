@@ -2,6 +2,12 @@
 import { ref, computed, type Ref } from 'vue'
 import draggable from 'vuedraggable'
 
+type DragEvent = Event & {
+  oldIndex: number
+  newIndex: number
+  to: { dataset: Record<string, string> }
+}
+
 const row0 = ref([-1, -1, 1, 1, 1, -1, -1])
 const row1 = ref([-1, -1, 1, 1, 1, -1, -1])
 const row2 = ref([1, 1, 1, 1, 1, 1, 1])
@@ -49,27 +55,29 @@ const checkDirections = (row: number, col: number) => {
   else return false
 }
 
-const onMove = ref(
-  (event: Event & { oldIndex: number; to: { dataset: Record<string, string> } }, row: number) => {
-    drag.value = true
-    const oldIndex = event.oldIndex
-    const value = board.value[row][oldIndex]
-    if (value === -1 || value === 0) {
-      hint.value = true
-      carry = [...board.value]
-      setTimeout(() => (hint.value = false), 3000)
-    } else checkDirections(row, oldIndex)
-    console.log(possibleMoves.value)
-    // if (value === 1) {
-    //   const targetRow = Number(event.to?.dataset?.row)
-    //   if (board.value[targetRow]?.length )
-    // }
-  }
-)
+const allowMove = ref(true)
 
-const moveEnd = ref(() => {
-  drag.value = false
-  if (carry.length) {
+const onMove = ref((event: DragEvent, row: number) => {
+  drag.value = true
+  const oldIndex = event.oldIndex
+  const value = board.value[row][oldIndex]
+  carry = [...board.value]
+  if (value === -1 || value === 0) {
+    hint.value = true
+    allowMove.value = false
+    setTimeout(() => (hint.value = false), 3000)
+  } else if (value === 1) checkDirections(row, oldIndex)
+})
+
+const moveEnd = ref((event: DragEvent) => {
+  const targetCol = event.newIndex
+  const targetRow = Number(event.to?.dataset?.row)
+  if (allowMove.value)
+    allowMove.value = possibleMoves.value.some(
+      (dir) => dir[0] === targetRow && dir[1] === targetCol
+    )
+
+  if (!allowMove.value) {
     row0.value = carry[0]
     row1.value = carry[1]
     row2.value = carry[2]
@@ -78,6 +86,7 @@ const moveEnd = ref(() => {
     row5.value = carry[5]
     row6.value = carry[6]
   }
+  drag.value = false
 })
 </script>
 
@@ -115,6 +124,7 @@ const moveEnd = ref(() => {
       data-row="0"
       @start="(event) => onMove(event, 0)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -138,6 +148,7 @@ const moveEnd = ref(() => {
       group="rows"
       @start="(event) => onMove(event, 1)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -157,9 +168,11 @@ const moveEnd = ref(() => {
     </draggable>
     <draggable
       v-model="row2"
+      data-row="2"
       group="rows"
       @start="(event) => onMove(event, 2)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -179,9 +192,11 @@ const moveEnd = ref(() => {
     </draggable>
     <draggable
       v-model="row3"
+      data-row="3"
       group="rows"
       @start="(event) => onMove(event, 3)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -201,9 +216,11 @@ const moveEnd = ref(() => {
     </draggable>
     <draggable
       v-model="row4"
+      data-row="4"
       group="rows"
       @start="(event) => onMove(event, 4)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -223,9 +240,11 @@ const moveEnd = ref(() => {
     </draggable>
     <draggable
       v-model="row5"
+      data-row="5"
       group="rows"
       @start="(event) => onMove(event, 5)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -245,9 +264,11 @@ const moveEnd = ref(() => {
     </draggable>
     <draggable
       v-model="row6"
+      data-row="6"
       group="rows"
       @start="(event) => onMove(event, 6)"
       @end="moveEnd"
+      style="height: 56px"
       item-key="col"
     >
       <template #item="{ element, indx }">
