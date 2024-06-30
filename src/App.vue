@@ -32,7 +32,7 @@ const checkDirections = (row: number, col: number) => {
   DIRECTIONS.forEach((dir) => {
     const ROW_LEN = 7
     if (
-      [row + dir[0], col + dir[1], row + dir[0] * 2, col + dir[1] * 2].every(
+      [row + dir[0], col + dir[1], row + dir[0] * 2, col + dir[1] * 2].some(
         (item) => item >= ROW_LEN || item < 0
       )
     )
