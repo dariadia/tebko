@@ -88,7 +88,7 @@ const moveEnd = ref((event: DragEvent) => {
     else if (targetCol > fromCol) midCol = targetCol - 1
 
     if (targetRow < fromRow) midRow = targetRow + 1
-    else if (targetRow > fromCol) midRow = targetRow - 1
+    else if (targetRow > fromRow) midRow = targetRow - 1
     carry[midRow][midCol] = 0
     carry[fromRow][fromCol] = 0
     carry[targetRow][targetCol] = 1
