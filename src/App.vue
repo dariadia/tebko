@@ -6,6 +6,7 @@ type DragEvent = Event & {
   oldIndex: number
   newIndex: number
   to: { dataset: Record<string, string> }
+  from: { dataset: Record<string, string> }
 }
 
 const row0 = ref([-1, -1, 1, 1, 1, -1, -1])
@@ -72,20 +73,33 @@ const onMove = ref((event: DragEvent, row: number) => {
 const moveEnd = ref((event: DragEvent) => {
   const targetCol = event.newIndex
   const targetRow = Number(event.to?.dataset?.row)
+
   if (allowMove.value)
     allowMove.value = possibleMoves.value.some(
       (dir) => dir[0] === targetRow && dir[1] === targetCol
     )
 
-  if (!allowMove.value) {
-    row0.value = carry[0]
-    row1.value = carry[1]
-    row2.value = carry[2]
-    row3.value = carry[3]
-    row4.value = carry[4]
-    row5.value = carry[5]
-    row6.value = carry[6]
+  if (allowMove.value) {
+    const fromCol = event.oldIndex
+    const fromRow = Number(event.from?.dataset?.row)
+    let midCol = fromCol
+    let midRow = fromRow
+    if (targetCol < fromCol) midCol = targetCol + 1
+    else if (targetCol > fromCol) midCol = targetCol - 1
+
+    if (targetRow < fromRow) midRow = targetRow + 1
+    else if (targetRow > fromCol) midRow = targetRow - 1
+    carry[midRow][midCol] = 0
+    carry[fromRow][fromCol] = 0
   }
+
+  row0.value = carry[0]
+  row1.value = carry[1]
+  row2.value = carry[2]
+  row3.value = carry[3]
+  row4.value = carry[4]
+  row5.value = carry[5]
+  row6.value = carry[6]
   drag.value = false
 })
 </script>
