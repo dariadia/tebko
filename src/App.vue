@@ -118,10 +118,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
     <draggable
@@ -133,10 +141,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
     <draggable
@@ -147,10 +163,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
     <draggable
@@ -161,10 +185,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
     <draggable
@@ -175,10 +207,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
     <draggable
@@ -189,10 +229,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
     <draggable
@@ -203,10 +251,18 @@ const moveEnd = ref(() => {
       item-key="col"
     >
       <template #item="{ element, indx }">
-        <v-col :key="indx" class="py-5 px-6 border-surface border-sm d-inline-block w-auto">
+        <v-card
+          :key="indx"
+          tile
+          plain
+          max-width="56"
+          variant="plain"
+          max-height="56"
+          class="py-4 my-0 px-6 border-surface border-sm d-inline-block w-auto"
+        >
           <span v-if="element !== -1">{{ element }}</span>
           <span v-else style="opacity: 0">1</span>
-        </v-col>
+        </v-card>
       </template>
     </draggable>
   </main>
