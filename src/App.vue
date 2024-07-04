@@ -335,3 +335,15 @@ const moveEnd = ref((event: DragEvent) => {
     </draggable>
   </main>
 </template>
+<style>
+@media screen and (max-width: 450px) {
+  .v-card.d-inline-block {
+    max-width: 48px !important;
+    max-height: 48px !important;
+    padding: 8px 16px !important;
+  }
+  main > div {
+    height: 48px !important;
+  }
+}
+</style>
