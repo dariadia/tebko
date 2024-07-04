@@ -126,7 +126,7 @@ const moveEnd = ref((event: DragEvent) => {
         </v-list-item>
       </v-list>
     </v-menu>
-    <h4 v-if="!playing">Вы выиграли</h4>
+    <h4 v-if="!playing" class="mt-4">Вы выиграли! 🎉</h4>
   </header>
   <main class="pt-10 d-block mx-auto" style="width: fit-content">
     <v-fade-transition>
