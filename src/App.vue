@@ -57,6 +57,7 @@ const checkDirections = (row: number, col: number) => {
 }
 
 const allowMove = ref(true)
+const ruleBreak = ref(false)
 
 const onMove = ref((event: DragEvent, row: number) => {
   drag.value = true
@@ -111,6 +112,20 @@ const moveEnd = ref((event: DragEvent) => {
       >Головоломка символизирует стадо оленей в тундре. Задача игрока - собрать стадо вместе, согнав
       их в центр.</small
     >
+    <v-spacer />
+    <v-menu max-width="300" open-on-hover theme="dark">
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props" class="mt-5"> Правила игры </v-btn>
+      </template>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title><b>Правила игры</b></v-list-item-title>
+          Ходить можно по вертикали и горизонтали (по диагонали запрещается), перешагивая через
+          занятую клетку («олень»). «Оленя» через которого перешагнули, убирают с поля. Игра
+          считается выигранной, если на доске останется только один «олень».
+        </v-list-item>
+      </v-list>
+    </v-menu>
     <h4 v-if="!playing">Вы выиграли</h4>
   </header>
   <main class="pt-10 d-block mx-auto" style="width: fit-content">
@@ -120,6 +135,24 @@ const moveEnd = ref((event: DragEvent) => {
         position="absolute"
         color="warning"
         text="⚠︎ Вы можете двигать только оленей"
+        class="py-2 px-4"
+        style="
+          top: calc((100vh - 50px) / 2);
+          left: calc((100vw - 300px) / 2);
+          cursor: pointer;
+          background-color: var(--vt-c-black);
+          z-index: 2;
+        "
+        variant="outlined"
+        @click="hint = false"
+      ></v-alert>
+    </v-fade-transition>
+    <v-fade-transition>
+      <v-alert
+        v-model="ruleBreak"
+        position="absolute"
+        color="warning"
+        text="⚠︎ Так ходить нельзя! Проверьте подсказки в описании игры"
         class="py-2 px-4"
         style="
           top: calc((100vh - 50px) / 2);
