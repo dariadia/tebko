@@ -138,7 +138,7 @@ const moveEnd = ref((event: DragEvent) => {
       data-row="0"
       @start="(event) => onMove(event, 0)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -162,7 +162,7 @@ const moveEnd = ref((event: DragEvent) => {
       group="rows"
       @start="(event) => onMove(event, 1)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -186,7 +186,7 @@ const moveEnd = ref((event: DragEvent) => {
       group="rows"
       @start="(event) => onMove(event, 2)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -210,7 +210,7 @@ const moveEnd = ref((event: DragEvent) => {
       group="rows"
       @start="(event) => onMove(event, 3)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -234,7 +234,7 @@ const moveEnd = ref((event: DragEvent) => {
       group="rows"
       @start="(event) => onMove(event, 4)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -258,7 +258,7 @@ const moveEnd = ref((event: DragEvent) => {
       group="rows"
       @start="(event) => onMove(event, 5)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
@@ -282,7 +282,7 @@ const moveEnd = ref((event: DragEvent) => {
       group="rows"
       @start="(event) => onMove(event, 6)"
       @end="moveEnd"
-      style="height: 56px"
+      style="height: 56px; max-width: 392px; overflow: hidden"
       item-key="col"
     >
       <template #item="{ element, indx }">
